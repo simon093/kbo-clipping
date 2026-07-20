@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KBO 데일리 클리핑 · 2026. 07. 21 (화)</title>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+:root{--navy:#14224A;--navy-2:#1E3163;--coral:#FF5A4D;--blue:#3B6EF6;--bg:#F4F5F8;--card:#FFFFFF;--line:#E5E7EE;--ink:#14224A;--muted:#6B7280;--win:#1E9E6A;--draw:#8A8F9C;--amber:#C4841D;--purple:#6C4BD8;--red:#C0392B;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased;}
+a{color:inherit;text-decoration:none;}
+.wrap{max-width:1120px;margin:22px auto 0;padding:0 20px 64px;}
+header{background:var(--navy);color:#fff;padding:24px 0 20px;}
+.header-inner{max-width:1120px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px;}
+.brand{display:flex;align-items:center;gap:12px;}
+.brand .dot{width:10px;height:34px;background:var(--coral);border-radius:2px;}
+.brand h1{font-size:22px;font-weight:800;letter-spacing:-.02em;}
+.brand .sub{font-size:12px;color:#A9B3D0;font-weight:500;margin-top:2px;}
+.header-meta{text-align:right;font-size:12px;color:#A9B3D0;}
+.header-meta .date{font-size:16px;font-weight:700;color:#fff;}
+.header-meta .fresh{color:#7FE0B0;font-weight:600;}
+.sample-tag{display:inline-block;background:rgba(255,90,77,.15);color:#FF8A80;border:1px solid rgba(255,90,77,.4);font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px;margin-top:6px;}
+.archive{background:var(--navy-2);}
+.archive-inner{max-width:1120px;margin:0 auto;padding:9px 20px;display:flex;align-items:center;gap:10px;overflow-x:auto;}
+.archive-lbl{font-size:11px;font-weight:800;color:#A9B3D0;white-space:nowrap;letter-spacing:.03em;}
+.archive a{font-size:12px;font-weight:600;color:#C8D0E8;background:rgba(255,255,255,.06);padding:4px 10px;border-radius:6px;white-space:nowrap;}
+.archive a:hover{background:rgba(255,255,255,.14);}
+.archive a.on{background:var(--coral);color:#fff;}
+.summary{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin-bottom:22px;display:flex;gap:22px;flex-wrap:wrap;}
+.summary .lead{font-size:12px;font-weight:800;color:var(--coral);letter-spacing:.04em;align-self:center;white-space:nowrap;}
+.summary ul{list-style:none;display:flex;gap:24px;flex-wrap:wrap;flex:1;}
+.summary li{font-size:14px;font-weight:500;position:relative;padding-left:14px;}
+.summary li::before{content:"";position:absolute;left:0;top:9px;width:5px;height:5px;border-radius:50%;background:var(--blue);}
+.summary b{font-weight:800;}
+section{margin-bottom:26px;}
+.sec-head{display:flex;align-items:center;gap:9px;margin-bottom:12px;}
+.sec-head .bar{width:4px;height:18px;background:var(--navy);border-radius:2px;}
+.sec-head h2{font-size:16px;font-weight:800;letter-spacing:-.01em;}
+.sec-head .tag{font-size:11px;color:var(--muted);font-weight:600;margin-left:auto;}
+.grid{display:grid;grid-template-columns:1.15fr 1fr;gap:22px;}
+@media (max-width:860px){.grid{grid-template-columns:1fr;}}
+.games{display:flex;flex-direction:column;gap:8px;}
+.game{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:border-color .15s,box-shadow .15s;}
+.game:hover{border-color:#C7CEDE;box-shadow:0 2px 8px rgba(20,34,74,.06);}
+.game.expanded{border-color:var(--navy);border-bottom-left-radius:0;border-bottom-right-radius:0;}
+.team{flex:1;display:flex;align-items:center;justify-content:space-between;}
+.team .name{font-size:14px;font-weight:600;}
+.team .score{font-size:20px;font-weight:800;font-variant-numeric:tabular-nums;min-width:28px;text-align:center;}
+.vs{color:var(--muted);font-size:12px;font-weight:700;padding:0 4px;}
+.win .name,.win .score{color:var(--navy);}
+.lose .name,.lose .score{color:#A7ADBB;}
+.badge{font-size:10px;font-weight:800;padding:2px 7px;border-radius:5px;color:#fff;flex-shrink:0;}
+.badge.w{background:var(--win);}.badge.d{background:var(--draw);}
+.chev{color:#B4BAC6;font-size:12px;font-weight:700;flex-shrink:0;transition:transform .18s;}
+.game.expanded .chev{transform:rotate(180deg);color:var(--navy);}
+.game-detail{display:none;background:#FBFBFD;border:1px solid var(--navy);border-top:none;border-radius:0 0 10px 10px;padding:14px 16px 15px;margin-top:-8px;}
+.scorebox{background:#fff;border:1px solid var(--line);border-radius:8px;padding:10px 10px 4px;margin-bottom:11px;overflow-x:auto;}
+table.linescore{border-collapse:collapse;font-size:12px;width:100%;min-width:340px;}
+table.linescore th,table.linescore td{padding:5px 6px;text-align:center;font-variant-numeric:tabular-nums;}
+table.linescore thead th{color:#A0A6B2;font-weight:700;font-size:10.5px;border-bottom:1px solid var(--line);}
+table.linescore td.tm,table.linescore th.tm{text-align:left;font-weight:700;min-width:44px;color:var(--navy);}
+table.linescore td.rr{font-weight:800;color:var(--navy);border-left:1px solid var(--line);}
+table.linescore tr.awin td.rr{color:var(--coral);}
+.ls-note{font-size:10.5px;color:#A0A6B2;padding:4px 2px 2px;}
+.wls{display:flex;flex-wrap:wrap;gap:6px 14px;margin-bottom:11px;}
+.wls-item{font-size:12.5px;display:flex;align-items:center;gap:6px;}
+.wls-k{font-size:10px;font-weight:800;padding:2px 7px;border-radius:5px;white-space:nowrap;}
+.wls-k.w{background:#EAF7F0;color:var(--win);}.wls-k.l{background:#FDECEC;color:var(--red);}
+.wls-k.s{background:#EEF3FF;color:var(--blue);}.wls-k.gw{background:#FBF3E3;color:var(--amber);}
+.wls-k.d{background:#F0F1F5;color:var(--navy);}
+.wls-v{font-weight:600;color:#3A4256;}.wls-v.mute{color:#AEB4C0;font-weight:500;}
+.gd-flow{font-size:13px;color:#3A4256;line-height:1.6;margin-bottom:10px;}
+.gd-flow b{color:var(--navy);font-weight:700;}
+.gd-label{font-size:11px;font-weight:800;color:var(--muted);letter-spacing:.03em;margin-bottom:6px;}
+.gd-tags{display:flex;flex-direction:column;gap:6px;}
+.gd-tag{display:flex;gap:8px;align-items:baseline;font-size:12.5px;line-height:1.5;}
+.gd-tag .k{font-size:10px;font-weight:800;padding:2px 7px;border-radius:5px;flex-shrink:0;white-space:nowrap;}
+.k.rec{background:#EAF7F0;color:var(--win);}.k.inj{background:#FFF0EE;color:var(--coral);}
+.k.riv{background:#F3EEFC;color:var(--purple);}.k.hr{background:#FBF3E3;color:var(--amber);}
+.k.eject{background:#FDECEC;color:var(--red);}.k.draw{background:#F0F1F5;color:var(--navy);}
+.gd-tag .v{color:#3A4256;}
+.stand{background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;}
+table.st{width:100%;border-collapse:collapse;font-size:13px;}
+table.st thead th{background:#F0F2F7;color:var(--muted);font-weight:700;font-size:11px;text-align:center;padding:9px 6px;}
+table.st thead th.tl{text-align:left;padding-left:16px;}
+table.st tbody td{padding:8px 6px;text-align:center;border-top:1px solid var(--line);font-variant-numeric:tabular-nums;}
+table.st tbody td.tl{text-align:left;padding-left:16px;font-weight:700;}
+table.st tbody tr:nth-child(-n+3) td{background:#FBFBFD;}
+.rank{font-weight:800;width:26px;}.rank.top{color:var(--coral);}
+.issues{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;}
+.issue{padding:14px 16px;border-top:1px solid var(--line);}
+.issue:first-child{border-top:none;}
+.issue-top{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
+.cat{display:inline-block;font-size:10px;font-weight:800;padding:2px 8px;border-radius:5px;letter-spacing:.02em;white-space:nowrap;}
+.cat.record{background:#EAF7F0;color:var(--win);}.cat.biz{background:#FFF0EE;color:var(--coral);}
+.cat.media{background:#EEF3FF;color:var(--blue);}.cat.rule{background:#F0F1F5;color:var(--navy);}
+.cat.judge{background:#F3EEFC;color:var(--purple);}.cat.game{background:#FBF3E3;color:var(--amber);}
+.cat.incident{background:#FDECEC;color:var(--red);}
+.issue .when{font-size:11px;color:#A0A6B2;font-weight:600;margin-left:auto;white-space:nowrap;}
+.issue .when.hot{color:var(--coral);}
+.issue h3{font-size:14px;font-weight:700;margin-bottom:4px;letter-spacing:-.01em;}
+.issue p{font-size:13px;color:var(--muted);line-height:1.55;margin-bottom:7px;}
+.src{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;color:var(--blue);}
+.src:hover{text-decoration:underline;}
+.src .out{color:#B4BAC6;font-weight:500;}
+.buzz{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;}
+.buzz-row{display:flex;align-items:center;gap:12px;padding:9px 0;border-top:1px solid var(--line);}
+.buzz-row:first-child{border-top:none;padding-top:0;}
+.buzz-rank{font-size:13px;font-weight:800;color:var(--coral);width:20px;}
+.buzz-topic{flex:1;font-size:13px;font-weight:600;}
+.buzz-bar-wrap{width:88px;height:6px;background:#EEF0F5;border-radius:4px;overflow:hidden;}
+.buzz-bar{height:100%;background:var(--blue);border-radius:4px;}
+.disclaimer{font-size:11px;color:#9AA0AC;background:#EEF0F5;border-radius:6px;padding:5px 9px;margin-top:8px;display:inline-block;}
+.att{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+.att-card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;}
+.att-card .lbl{font-size:12px;color:var(--muted);font-weight:600;margin-bottom:6px;}
+.att-card .val{font-size:22px;font-weight:800;color:var(--navy);font-variant-numeric:tabular-nums;letter-spacing:-.01em;}
+.att-card .val small{font-size:13px;font-weight:600;color:var(--muted);}
+.att-card .note{font-size:11px;color:var(--coral);font-weight:700;margin-top:5px;}
+footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);font-size:11px;color:var(--muted);line-height:1.7;}
+footer b{color:var(--ink);}
+</style></head><body>
+<header><div class="header-inner">
+<div class="brand"><div class="dot"></div><div><h1>KBO 데일리 클리핑</h1>
+<div class="sub">운영팀 모니터링 리포트 · 2026 신한 SOL KBO 리그</div></div></div>
+<div class="header-meta"><div class="date">2026. 07. 21 (화)</div>
+<div><span class="fresh">최종 수집 00:44</span> · 배포 09:00</div>
+<div class="sample-tag">SAMPLE · 형식 확인용</div></div></div></header>
+<div class="archive"><div class="archive-inner"><span class="archive-lbl">📁 지난 클리핑</span><a class="on" href="2026-07-21.html">07.21 (화)</a><a class="" href="2026-07-20.html">07.20 (월)</a><a href="index.html">전체 보기 →</a></div></div>
+<div class="wrap">
+<div class="summary"><div class="lead">오늘의 핵심</div><ul><li>2026 KBO 리그 역대 최소 경기 800만 관중 달성</li><li>8위 롯데, 선두 삼성 원정서 9회 역전승</li><li>류현진, 한국 투수 최초 한·미 통산 2,500K</li></ul></div>
+<div class="grid">
+<section><div class="sec-head"><span class="bar"></span><h2>어제 경기 결과</h2>
+<span class="tag">07.19 (일) · 카드 클릭 시 스코어보드 ▾</span></div>
+<div class="games"><div class="game"><div class="team win"><span class="name">롯데</span><span class="score">11</span></div><span class="vs">vs</span><div class="team lose"><span class="score">8</span><span class="name">삼성</span></div><span class="badge w">롯데</span><span class="chev">▾</span></div><div class="game-detail"><div class="scorebox"><table class="linescore">
+<thead><tr><th class="tm"></th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>R</th></tr></thead>
+<tbody>
+<tr class="awin"><td class="tm">롯데</td><td>0</td><td>0</td><td>3</td><td>0</td><td>3</td><td>1</td><td>0</td><td>0</td><td>4</td><td class="rr">11</td></tr>
+<tr><td class="tm">삼성</td><td>0</td><td>0</td><td>3</td><td>0</td><td>0</td><td>0</td><td>4</td><td>1</td><td>0</td><td class="rr">8</td></tr>
+</tbody></table><div class="ls-note">대구 · 롯데 원정</div></div><div class="wls"><div class="wls-item"><span class="wls-k w">승</span><span class="wls-v mute">자동 연동</span></div><div class="wls-item"><span class="wls-k l">패</span><span class="wls-v">김재윤 (삼성, 9회 블론)</span></div><div class="wls-item"><span class="wls-k s">세이브</span><span class="wls-v mute">자동 연동</span></div><div class="wls-item"><span class="wls-k gw">결승타</span><span class="wls-v">전민재 (9회 역전 3타점 2루타)</span></div></div><div class="gd-flow">우중 혈투 <b>3-3→7-3→7-8→11-8</b>. 롯데가 9회 삼성 마무리 김재윤을 상대로 4점을 뽑아 역전승.</div><div class="gd-label">특이사항</div><div class="gd-tags"><div class="gd-tag"><span class="k hr">이변</span><span class="v">8위 롯데, 선두 삼성 원정서 9회 역전승</span></div><div class="gd-tag"><span class="k riv">천적</span><span class="v">삼성 구자욱, 3회 좌월 3점포</span></div></div></div><div class="game"><div class="team "><span class="name">키움</span><span class="score">9</span></div><span class="vs">vs</span><div class="team "><span class="score">9</span><span class="name">한화</span></div><span class="badge d">무</span><span class="chev">▾</span></div><div class="game-detail"><div class="wls"><div class="wls-item"><span class="wls-k d">무승부</span><span class="wls-v mute">승·패·세이브·결승타 해당 없음</span></div></div><div class="gd-flow">류현진이 2회 한·미 통산 2,500K 완성. 한화가 8-1 리드를 놓치고 연장 11회 9-9 무승부.</div><div class="gd-label">특이사항</div><div class="gd-tags"><div class="gd-tag"><span class="k rec">대기록</span><span class="v">류현진, 한국 투수 최초 한·미 통산 2,500K</span></div><div class="gd-tag"><span class="k eject">불펜 붕괴</span><span class="v">한화 8-1 리드 → 8회 대량실점</span></div></div></div><div class="game"><div class="team win"><span class="name">KT</span><span class="score">4</span></div><span class="vs">vs</span><div class="team lose"><span class="score">1</span><span class="name">LG</span></div><span class="badge w">KT</span><span class="chev">▾</span></div><div class="game-detail"><div class="wls"><div class="wls-item"><span class="wls-k w">승</span><span class="wls-v mute">자동 연동</span></div><div class="wls-item"><span class="wls-k l">패</span><span class="wls-v mute">자동 연동</span></div><div class="wls-item"><span class="wls-k s">세이브</span><span class="wls-v mute">자동 연동</span></div><div class="wls-item"><span class="wls-k gw">결승타</span><span class="wls-v mute">자동 연동</span></div></div><div class="gd-flow">KT 고영표 6이닝 무실점 호투, LG 4연전 스윕하며 단독 2위 탈환.</div><div class="gd-label">특이사항</div><div class="gd-tags"><div class="gd-tag"><span class="k draw">순위</span><span class="v">KT 7연승·2위 / LG 5연패·3위 추락</span></div></div></div><div class="game"><div class="team win"><span class="name">KIA</span><span class="score">9</span></div><span class="vs">vs</span><div class="team lose"><span class="score">5</span><span class="name">SSG</span></div><span class="badge w">KIA</span><span class="chev">▾</span></div><div class="game-detail"><div class="wls"><div class="wls-item"><span class="wls-k w">승</span><span class="wls-v mute">자동 연동</span></div><div class="wls-item"><span class="wls-k l">패</span><span class="wls-v mute">자동 연동</span></div><div class="wls-item"><span class="wls-k s">세이브</span><span class="wls-v mute">자동 연동</span></div><div class="wls-item"><span class="wls-k gw">결승타</span><span class="wls-v">김호령 (8회 역전타)</span></div></div><div class="gd-flow">8회 김호령 역전타와 카스트로 쐐기포로 KIA가 SSG를 제압, 3연승.</div><div class="gd-label">특이사항</div><div class="gd-tags"><div class="gd-tag"><span class="k hr">쐐기</span><span class="v">카스트로 8회 쐐기 홈런</span></div></div></div><div class="game"><div class="team win"><span class="name">두산</span><span class="score">10</span></div><span class="vs">vs</span><div class="team lose"><span class="score">3</span><span class="name">NC</span></div><span class="badge w">두산</span><span class="chev">▾</span></div><div class="game-detail"><div class="wls"><div class="wls-item"><span class="wls-k w">승</span><span class="wls-v">최승용 (두산)</span></div><div class="wls-item"><span class="wls-k l">패</span><span class="wls-v mute">자동 연동</span></div><div class="wls-item"><span class="wls-k s">세이브</span><span class="wls-v mute">자동 연동</span></div><div class="wls-item"><span class="wls-k gw">결승타</span><span class="wls-v">강승호 (결승포 포함 4타점)</span></div></div><div class="gd-flow">강승호 결승포 포함 4타점, 최승용 역투로 두산이 NC 원정 10-3 낙승.</div><div class="gd-label">특이사항</div><div class="gd-tags"><div class="gd-tag"><span class="k hr">홈런</span><span class="v">두산 강승호, 결승 홈런 + 4타점</span></div></div></div></div></section>
+<section><div class="sec-head"><span class="bar"></span><h2>팀 순위</h2><span class="tag">07.19 기준</span></div>
+<div class="stand"><table class="st"><thead><tr><th>순위</th><th class="tl">팀</th><th>승</th><th>무</th><th>패</th></tr></thead>
+<tbody><tr><td class="rank top">1</td><td class="tl">삼성</td><td>53</td><td>2</td><td>33</td></tr><tr><td class="rank top">2</td><td class="tl">KT</td><td>51</td><td>1</td><td>35</td></tr><tr><td class="rank top">3</td><td class="tl">LG</td><td>52</td><td>0</td><td>37</td></tr><tr><td class="rank">4</td><td class="tl">KIA</td><td>48</td><td>2</td><td>40</td></tr><tr><td class="rank">5</td><td class="tl">두산</td><td>47</td><td>2</td><td>42</td></tr><tr><td class="rank">6</td><td class="tl">한화</td><td>40</td><td>3</td><td>43</td></tr><tr><td class="rank">7</td><td class="tl">NC</td><td>40</td><td>1</td><td>45</td></tr><tr><td class="rank">8</td><td class="tl">롯데</td><td>39</td><td>2</td><td>47</td></tr><tr><td class="rank">9</td><td class="tl">SSG</td><td>32</td><td>3</td><td>55</td></tr><tr><td class="rank">10</td><td class="tl">키움</td><td>32</td><td>1</td><td>57</td></tr></tbody></table></div></section>
+</div>
+<div class="grid" style="align-items:start;">
+<section style="margin-bottom:0;"><div class="sec-head"><span class="bar" style="background:var(--coral);"></span>
+<h2>어제~오늘 핫이슈</h2><span class="tag">최근 24시간</span></div><div class="issues"><div class="issue"><div class="issue-top"><span class="cat record">기록·달성</span><span class="when">07.21</span></div><h3>2026 KBO 리그 역대 최소 경기 800만 관중 달성</h3><p></p><a class="src" href="https://news.google.com/rss/articles/CBMiW0FVX3lxTFAtTjllbVNFWWFfNnBwaGduR05Cb1JTUjI1UTdILWtDeTZFaXRiV1VoWUNWU2ttc1d6TS1yMmllb3hia3lYbHB3VTNxelViRFBwM2xuUFV3eUxTSFE?oc=5" target="_blank" rel="noopener">🔗 비전21뉴스 <span class="out">· 기사 원문</span></a></div><div class="issue"><div class="issue-top"><span class="cat record">기록·달성</span><span class="when">07.21</span></div><h3>[A-포커스] &#x27;역대급 흥행 돌풍&#x27; KBO리그, 최소 443경기 만에 800만 관중 돌파</h3><p></p><a class="src" href="https://news.google.com/rss/articles/CBMiaEFVX3lxTE5xUl9TelBPSmVlMVVBZDBCRjdIbW1kbTdkMXNMcjU0eDdhMlVSb2l0NjJ6RWEtcU1feWV0Ukp2N29ITU1qME5tTGVuUG51dlUtRUFWcUxadzE4OTBxWEFuNEl1cTRkb3pu?oc=5" target="_blank" rel="noopener">🔗 asportstv.kr <span class="out">· 기사 원문</span></a></div><div class="issue"><div class="issue-top"><span class="cat record">기록·달성</span><span class="when">07.21</span></div><h3>2026 신한 SOL KBO 리그 후반기 주요 예상 달성 기록</h3><p></p><a class="src" href="https://news.google.com/rss/articles/CBMiZkFVX3lxTFBLZHFsZW1lTG1LV2lyTWtqRzVwYWhhWEc4VEdFM0o4WWFxUjR5QkVtS2s3c2JnVWZJVmtPLUZaVkZNeXJnb2RJWGFjNFd2RExmdjVBVjRDa0s1a09MMHpabDR5dHR0QQ?oc=5" target="_blank" rel="noopener">🔗 한국미디어뉴스 <span class="out">· 기사 원문</span></a></div><div class="issue"><div class="issue-top"><span class="cat record">기록·달성</span><span class="when">07.21</span></div><h3>KBO리그 800만 관중도 최소 경기 기록 달성…LG·삼성 홈 관중 100만 넘었다</h3><p></p><a class="src" href="https://news.google.com/rss/articles/CBMiWEFVX3lxTE1jTC04cl90WjNaZ21fUmdPSWZxRkNmel9FR05odlN2aXM0NjdXYlNYMlZLVE1LSkRBWGNwNDRwcC1HTktZSndzQ2NTbllfOFdjRXN4UHZIai3SAVhBVV95cUxNY0wtOHJfdFozWmdtX1JnT0lmcUZDZnpfRUdOaHZTdmlzNDY3V2JTWDJWS1RNS0pEQVhjcDQ0cHAtR05LWUp3c0NjU25ZXzhXY0VzeFB2SGot?oc=5" target="_blank" rel="noopener">🔗 미디어펜 <span class="out">· 기사 원문</span></a></div></div></section>
+<section style="margin-bottom:0;"><div class="sec-head"><span class="bar" style="background:var(--blue);"></span>
+<h2>운영 모니터링</h2><span class="tag">매일 갱신 · 최근 7일</span></div><div class="issues"><div class="issue"><div class="issue-top"><span class="cat incident">중계 사고</span><span class="when hot">07.21</span></div><h3>프로야구 kt-LG 잠실 경기, 전원 공급 끊겨 22분간 TV 중계 중단</h3><p></p><a class="src" href="https://news.google.com/rss/articles/CBMiW0FVX3lxTE1hRGQwc0xJcndzQ25ZT1hiZmdGRmh4dlhxTTRqTV9EcEV3UEpUVlFnYTRCMmlHY1NkZjg1WkJnZVkxRUFvNlRFQlpfUkhDaEdSbEdlQTRmYnFVLXPSAWBBVV95cUxQOXVOdWlkbXRreEtWUVJOUXNVTnF0bHBKUTJkckN4aGh2d0ZLaXliNzNpMmh4MzhJM2k4TUNQdmpHRWJCemRHbC1Hbkh6UjFaTlJ2WjQ1MTM4eUlrR3hSVlQ?oc=5" target="_blank" rel="noopener">🔗 연합뉴스 <span class="out">· 기사 원문</span></a></div><div class="issue"><div class="issue-top"><span class="cat media">중계·미디어</span><span class="when">지속</span></div><h3>티빙, KBO·KT 효과에 쿠팡플레이 제쳐…과징금 처분은 변수</h3><p></p><a class="src" href="https://news.google.com/rss/articles/CBMiVEFVX3lxTFBUbDJPUmstcHpJZ1dOQkdyWmdac2J3ODlOUDRpeXpRNU4wMTBuSzV3WEQtWHFxWVhUMEFScUY5cG13REVDcHFhWXBGbU54dVdZT3FsYw?oc=5" target="_blank" rel="noopener">🔗 v.daum.net <span class="out">· 기사 원문</span></a></div><div class="issue"><div class="issue-top"><span class="cat judge">판정·ABS</span><span class="when">지속</span></div><h3>어제는 맞고 오늘은 틀리다?…ABS 불만 대폭발</h3><p></p><a class="src" href="https://news.google.com/rss/articles/CBMiYEFVX3lxTE1Jdnh3R3FXSmhWY2IyMkFWRENSNXpjVFRNYmlHM2x5M24tUGxNQnhmbjVvaDA3ZGVLX1dsTXBkMFFLTktlaDNDdzlHNUlmZkNVRll4a3JJRkZDLVZHUXBjONIBYEFVX3lxTE1Jdnh3R3FXSmhWY2IyMkFWRENSNXpjVFRNYmlHM2x5M24tUGxNQnhmbjVvaDA3ZGVLX1dsTXBkMFFLTktlaDNDdzlHNUlmZkNVRll4a3JJRkZDLVZHUXBjOA?oc=5" target="_blank" rel="noopener">🔗 연합뉴스 <span class="out">· 기사 원문</span></a></div><div class="issue"><div class="issue-top"><span class="cat biz">흥행·마케팅</span><span class="when">지속</span></div><h3>KBO리그, 올해도 뜨거운 열기…역대 최소 경기 800만 관중</h3><p></p><a class="src" href="https://news.google.com/rss/articles/CBMiZ0FVX3lxTE1ydmUtNmktZWV4SkxXcXozVUt4Q3BJV0taLXJvaEFUdVVHUHFBelgwNkxZY3ZHcHRPR2YyTzRWUjlKNUt3ekpBaE1LU2hhTk1xV1JlbUEwU1Y2c25NV3dPRzRvXzdyN2c?oc=5" target="_blank" rel="noopener">🔗 연합뉴스TV <span class="out">· 기사 원문</span></a></div><div class="issue"><div class="issue-top"><span class="cat rule">제도·운영</span><span class="when">지속</span></div><h3>KBO 프로야구, 16일 경기 중계 일정→선발 투수?</h3><p></p><a class="src" href="https://news.google.com/rss/articles/CBMickFVX3lxTE5nTFRCc1JqV3BSLXNpX01aLUxFZ1RBM0NNdWhvbXVmaFQ3cFV1a0xOekVnMGg1dWN6S1R4VVVRdENrX3ZxM1VQVEZ0R1ZNamQ0dzJXb2dWREFTV0psTHRaWTc4UkZaR1RQZGdHbGhSVWcyUQ?oc=5" target="_blank" rel="noopener">🔗 톱스타뉴스 <span class="out">· 기사 원문</span></a></div></div></section>
+</div>
+<div class="grid" style="align-items:start;margin-top:26px;">
+<section style="margin-bottom:0;"><div class="sec-head"><span class="bar" style="background:var(--coral);"></span>
+<h2>여론 · 화제성</h2><span class="tag">뉴스 언급량 기준</span></div>
+<div class="buzz"><div class="buzz-row"><span class="buzz-rank">1</span><span class="buzz-topic">삼성</span><span class="buzz-bar-wrap"><span class="buzz-bar" style="width:100%;"></span></span></div><div class="buzz-row"><span class="buzz-rank">2</span><span class="buzz-topic">한화</span><span class="buzz-bar-wrap"><span class="buzz-bar" style="width:78%;"></span></span></div><div class="buzz-row"><span class="buzz-rank">3</span><span class="buzz-topic">부상</span><span class="buzz-bar-wrap"><span class="buzz-bar" style="width:54%;"></span></span></div><div class="buzz-row"><span class="buzz-rank">4</span><span class="buzz-topic">LG</span><span class="buzz-bar-wrap"><span class="buzz-bar" style="width:39%;"></span></span></div></div>
+<span class="disclaimer">※ 최근 24시간 뉴스 언급량 기반 화제 토픽 (자동 집계)</span></section>
+<section style="margin-bottom:0;"><div class="sec-head"><span class="bar"></span><h2>관중 · 흥행 지표</h2>
+<span class="tag">07.19 기준</span></div><div class="att"><div class="att-card"><div class="lbl">당일 관중 (5경기)</div><div class="val">95,487<small> 명</small></div><div class="note">경기당 평균 19,097명</div></div><div class="att-card"><div class="lbl">시즌 누적 관중</div><div class="val">8,007,967<small> 명</small></div><div class="note">800만 돌파</div></div><div class="att-card"><div class="lbl">800만 돌파 소요</div><div class="val">443<small> 경기</small></div><div class="note">역대 최소</div></div><div class="att-card"><div class="lbl">전반기 총 관중</div><div class="val">7,633,775<small> 명</small></div><div class="note">424경기</div></div></div></section>
+</div>
+<footer><b>KBO 데일리 클리핑</b> · 매일 09:00 자동 생성 · 데이터 출처: KBO 공식 기록 및 각 언론 보도.<br>
+운영 모니터링은 최근 7일 이슈 갱신, 여론·화제성은 뉴스 언급량 자동 집계. 지난 리포트는 상단 아카이브에서 열람.</footer>
+</div>
+<script>
+document.querySelectorAll('.game').forEach(function(g){
+  g.addEventListener('click',function(){
+    var d=g.nextElementSibling;
+    if(d&&d.classList.contains('game-detail')){
+      var open=d.style.display==='block';
+      d.style.display=open?'none':'block';
+      g.classList.toggle('expanded',!open);
+    }
+  });
+});
+</script>
+</body></html>
