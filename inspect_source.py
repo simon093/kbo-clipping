@@ -1,29 +1,42 @@
 # -*- coding: utf-8 -*-
-"""소스 응답 구조를 한 겹 더 깊이 출력한다."""
+"""경기가 있는 날짜를 찾아 실제 경기/박스스코어 구조를 출력한다."""
 import json, datetime as dt, requests
 
 UA = {"User-Agent": "Mozilla/5.0", "Referer": "https://m.sports.naver.com/"}
 KST = dt.timezone(dt.timedelta(hours=9))
-YDAY = (dt.datetime.now(KST) - dt.timedelta(days=1)).strftime("%Y-%m-%d")
 
-def dump(label, obj, n=1200):
-    print(f"\n----- {label} -----")
-    print(json.dumps(obj, ensure_ascii=False, indent=2)[:n])
+def get(url):
+    return requests.get(url, headers=UA, timeout=15).json()
 
 def main():
     print("=" * 60)
-    print(f"KBO 소스 점검(2) · 대상 {YDAY}")
-    print("=" * 60)
-    url = ("https://api-gw.sports.naver.com/schedule/games"
-           f"?fields=basic&upperCategoryId=kbaseball&categoryId=kbo"
-           f"&fromDate={YDAY}&toDate={YDAY}&size=20")
-    r = requests.get(url, headers=UA, timeout=15)
-    print("HTTP:", r.status_code)
-    data = r.json()
-    result = data.get("result", {})
-    print("\nresult 안의 키들:", list(result.keys()))
-    # result 안을 통째로 살짝 출력 (진짜 구조 확인용)
-    dump("result 내용 미리보기", result, 2000)
+    # 최근 7일을 훑어서 경기가 있는 첫 날을 찾는다
+    base = dt.datetime.now(KST)
+    found = None
+    for i in range(1, 8):
+        d = (base - dt.timedelta(days=i)).strftime("%Y-%m-%d")
+        url = ("https://api-gw.sports.naver.com/schedule/games"
+               f"?fields=basic&upperCategoryId=kbaseball&categoryId=kbo"
+               f"&fromDate={d}&toDate={d}&size=20")
+        games = get(url).get("result", {}).get("games", [])
+        print(f"{d}: 경기 {len(games)}개")
+        if games and not found:
+            found = (d, games)
+    if not found:
+        print("최근 7일간 경기를 못 찾음 — 이 내용 그대로 붙여주세요.")
+        return
+    d, games = found
+    print(f"\n★ 경기 있는 날: {d}")
+    g = games[0]
+    print("\n----- [중요] 경기 1개의 키 -----")
+    print(json.dumps(g, ensure_ascii=False, indent=2)[:1800])
+    gid = g.get("gameId") or g.get("gameCode") or g.get("id")
+    print("\ngameId 후보:", gid)
+    if gid:
+        rec = get(f"https://api-gw.sports.naver.com/sports/games/{gid}/record").get("result", {})
+        print("\n----- [중요] 박스스코어 키 -----")
+        print("최상위 키:", list(rec.keys()))
+        print(json.dumps(rec, ensure_ascii=False, indent=2)[:1800])
 
 if __name__ == "__main__":
     main()
