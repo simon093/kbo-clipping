@@ -1,48 +1,39 @@
 # -*- coding: utf-8 -*-
-"""KBO 공식 + 네이버 모바일에서 스코어보드 데이터 존재 여부를 직접 확인."""
-import re, datetime as dt, requests
+"""KBO 공식 스코어보드 HTML 구조를 확인 (테이블/이닝 위치)."""
+import re, requests
 UA={"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64)","Referer":"https://www.koreabaseball.com/"}
-KST=dt.timezone(dt.timedelta(hours=9))
-
-def get(u,**kw):
-    try:
-        r=requests.get(u,headers=UA,timeout=20,**kw); return r.status_code,r.text
-    except Exception as e: return "ERR",str(e)
-def post(u,data):
-    try:
-        r=requests.post(u,headers=UA,timeout=20,data=data); return r.status_code,r.text
-    except Exception as e: return "ERR",str(e)
 
 def main():
-    d="2026-07-19"; dd="20260719"
-    # ── 1) KBO 공식: 날짜별 스코어보드 (ASP.NET, 서버 렌더) ──
-    print("== KBO 공식 스코어보드 ==")
-    u=f"https://www.koreabaseball.com/Schedule/ScoreBoard.aspx"
-    code,html=get(u)
-    print(f"[{code}] {u}  길이:{len(html) if isinstance(html,str) else '?'}")
-    if isinstance(html,str):
-        # 팀명/점수/이닝 흔적이 HTML에 박혀 있는지
-        for kw in ["삼성","롯데","LG","이닝","스코어","tblScore","broadcast"]:
-            if kw in html: print("   포함:",kw)
-        # ASP.NET 폼 필드 확인 (POST로 날짜 바꿀 때 필요)
-        for f in ["__VIEWSTATE","__EVENTVALIDATION","ddlYear","ddlMonth"]:
-            print("   폼필드",f,":", "있음" if f in html else "없음")
+    u="https://www.koreabaseball.com/Schedule/ScoreBoard.aspx"
+    html=requests.get(u,headers=UA,timeout=20).text
+    print("길이:",len(html))
 
-    # ── 2) KBO 리뷰/문자중계 페이지 (경기별 상세) ──
-    print("\n== KBO 경기 리뷰 페이지 ==")
-    for u in [f"https://www.koreabaseball.com/Game/LiveText.aspx?leagueId=1&seriesId=0&gameId={dd}HTSK02026&gyear=2026",
-              f"https://www.koreabaseball.com/Game/BoxScore.aspx?leagueId=1&seriesId=0&gameId={dd}HTSK02026&gyear=2026"]:
-        code,html=get(u)
-        has=[kw for kw in ["삼성","KIA","SSG","이닝","승리투수","결승타","tbl"] if isinstance(html,str) and kw in html]
-        print(f"[{code}] {u.split('/')[-1][:40]}  길이:{len(html) if isinstance(html,str) else '?'}  포함:{has}")
+    # 1) 스코어보드 테이블(들) 위치 파악: class에 'score' 들어간 요소
+    classes=set(re.findall(r'class="([^"]*[Ss]core[^"]*)"',html))
+    print("\nscore 관련 class:",sorted(classes)[:20])
 
-    # ── 3) 네이버 모바일 API (게이트웨이 아닌 다른 호스트) ──
-    print("\n== 네이버 대체 호스트 ==")
-    gid="20260719HTSK02026"
-    for u in [f"https://sports.news.naver.com/gameCenter/gameRecord.nhn?category=kbo&gameId={gid}",
-              f"https://api-gw.sports.naver.com/sports/games/{gid}/record/basic",
-              f"https://sports.news.naver.com/ajax/kbaseball/game/{gid}/scoreboard"]:
-        code,html=get(u)
-        print(f"[{code}] {u.split('naver.com')[-1][:55]}  길이:{len(html) if isinstance(html,str) else '?'}")
+    # 2) 'tbl' 계열 테이블 class
+    tbls=set(re.findall(r'class="(tbl[^"]*)"',html))
+    print("tbl 계열 class:",sorted(tbls)[:20])
+
+    # 3) 삼성이 나오는 첫 지점 주변 800자 (실제 마크업 모양 보기)
+    i=html.find("삼성")
+    if i>0:
+        chunk=html[max(0,i-400):i+400]
+        chunk=re.sub(r'\s+',' ',chunk)
+        print("\n--- '삼성' 주변 마크업 ---\n",chunk)
+
+    # 4) 이닝별 숫자가 담긴 테이블 흔적: <td> 안 한 자리 숫자 연속
+    rows=re.findall(r'<tr[^>]*>.*?</tr>',html,re.S)
+    print("\n<tr> 개수:",len(rows))
+    # 점수판스러운 행(숫자 여러 개 든 tr) 2개만 샘플 출력
+    cnt=0
+    for r in rows:
+        nums=re.findall(r'>(\d{1,2})<',r)
+        if len(nums)>=9:
+            clean=re.sub(r'\s+',' ',re.sub(r'<[^>]+>',' ',r)).strip()
+            print(f"\n[점수판 후보] 숫자{len(nums)}개:",clean[:200])
+            cnt+=1
+            if cnt>=3: break
 
 if __name__=="__main__": main()
